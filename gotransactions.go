@@ -17,7 +17,7 @@ type (
 	transaction struct {
 		mtx sync.Mutex
 
-		onTr OnTransaction
+		onTx OnTransaction
 		onRb OnRollback
 		Ctx  context.Context
 	}
@@ -28,7 +28,7 @@ type (
 func New(onTransaction OnTransaction, onRollback OnRollback) TransactionIface {
 	return &transaction{
 		onRb: onRollback,
-		onTr: onTransaction,
+		onTx: onTransaction,
 	}
 }
 
@@ -36,7 +36,7 @@ func (tr *transaction) ExecuteTransaction() error {
 	tr.mtx.Lock()
 	defer tr.mtx.Unlock()
 
-	if err := tr.onTr(); err != nil {
+	if err := tr.onTx(); err != nil {
 		return tr.onRb()
 	}
 	return nil
