@@ -21,8 +21,6 @@ type (
 		onRb OnRollback
 		Ctx  context.Context
 	}
-
-	Option func()
 )
 
 func New(onTransaction OnTransaction, onRollback OnRollback) TransactionIface {
