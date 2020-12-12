@@ -19,18 +19,19 @@ Let's write a simple example.
 
 ```go
 func main() {
-	onTransaction := gotransactions.OnTransaction(func() error {
-		return nil
-    })
 	
-	onRollback := gotransactions.OnRollback(func() error {
-		return nil
-    })
+  onTransaction := gotransactions.OnTransaction(func() error {
+      return nil
+  })
 	
-	transaction := gotransactions.New(onTransaction, onRollback)
-	if err := transaction.ExecuteTransaction(); err != nil {
-		fmt.Println(err)
-    }
+  onRollback := gotransactions.OnRollback(func() error {
+      return nil
+  })
+	
+  transaction := gotransactions.New(onTransaction, onRollback)
+  if err := transaction.ExecuteTransaction(); err != nil {
+      fmt.Println(err)
+  }
 }
 ```
 
